@@ -1,0 +1,74 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 773px;
+    margin: auto;
+    padding: 24px;
+}
+
+.item,
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 35px;
+
+    h3 {
+        font: 600 28px Inter;
+        color: #232134;
+    }
+
+    h2 {
+        font: 700 20px Inter;
+        color: #232134;
+    }
+
+    li {
+        font: 400 16px Inter;
+        color: #232134;
+        margin: 0 30px;
+    }
+
+}
+
+.salary_workday {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    p{
+        font: 400 16px Inter;
+        color: #232134; 
+    }
+}
+
+
+.city {
+    display: flex;
+    gap: 10px;
+
+    p{
+        font: 400 16px Inter;
+        color: #232134; 
+    }
+}
+
+.point {
+    background-image: url(../assets/•.svg);
+    width: 8px;
+    height: 8px;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+}
+
+.img {
+    background-image: url(../assets/M.svg);
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
