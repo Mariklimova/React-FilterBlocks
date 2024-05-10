@@ -5,37 +5,14 @@ import arr from '../../Storage/arr.json'
 import { Link } from 'react-router-dom';
 
 function Vacancy() {
-    // const arr = [{ name: 'Менеджер-дизайнер', salary: 'з/п от 70000 rub', workday: 'Полный рабочий день', city: 'Новый Уренгой' },
-    // { name: 'Ведущий графический дизайнер НЕ УДАЛЕННО', salary: 'з/п от 80000 rub', workday: 'Полный рабочий день', city: 'Москва' },
-    // { name: 'Работник декорации, дизайнер (ТЦ Амбар)', salary: 'з/п 29000 rub', workday: 'Сменный график работы', city: 'Самара' },
-    // { name: 'Менеджер-дизайнер', salary: 'з/п 55000 - 95000 rub', workday: 'Полный рабочий день', city: 'Тюмень' },
-    // { name: 'Ведущий графический дизайнер НЕ УДАЛЕННО', salary: 'з/п от 80000 rub', workday: 'Полный рабочий день', city: 'Москва' },
-    // { name: 'Работник декорации, дизайнер (ТЦ Амбар)', salary: 'з/п 29000 rub', workday: 'Сменный график работы', city: 'Самара' },
-    // { name: 'Менеджер-дизайнер', salary: 'з/п 55000 - 95000 rub', workday: 'Полный рабочий день', city: 'Тюмень' },
-    // { name: 'Ведущий графический дизайнер НЕ УДАЛЕННО', salary: 'з/п от 80000 rub', workday: 'Полный рабочий день', city: 'Москва' },
-    // { name: 'Работник декорации, дизайнер (ТЦ Амбар)', salary: 'з/п 29000 rub', workday: 'Сменный график работы', city: 'Самара' },
-    // { name: 'Менеджер-дизайнер', salary: 'з/п 55000 - 95000 rub', workday: 'Полный рабочий день', city: 'Тюмень' }]
+   
+    const vacancyCount = 4;
+    const [page, setPage] = useState(1);
 
-
-    const [vacanciesIndex, setVacanciesIndex] = useState(0);
-    const [PageNumber, setPageNumber] = useState(1);
-
-    // const lastIndex = vacanciesOnThePage * paginalPageNumber;
-    // const firstIndex = lastIndex - vacanciesOnThePage;
-    // const displayedArray = arr.slice(firstIndex, lastIndex);
-
-    // function getIndex() {
-    //     setVacanciesIndex(vacanciesIndex + 4)
-    // }
-    // const index = getIndex()
-    // console.log(index);
-
-    const displayVacancy = arr.filter((el, i) => i >= 0 && i < 4)
-
-    // useEffect(() => {
-    //     getIndex()
-    // }, [])
-
+    const end = page * vacancyCount;
+    const start = end - vacancyCount;
+    // const displayVacancy = arr.slice(start, end);
+    const displayVacancy = arr.filter((el, i) => i >= start && i < end)
 
 
     return <div className={style.wrapper}>
@@ -62,7 +39,7 @@ function Vacancy() {
 
         </div>
 
-        <Pagination onChange={setPageNumber} count={10} variant="outlined" color="secondary" />
+        <Pagination page={page} onChange={(_, num) => setPage(num)} count={Math.ceil(arr.length / vacancyCount)} variant="outlined" color="secondary" />
 
     </div>
 
