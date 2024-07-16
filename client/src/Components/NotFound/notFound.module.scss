@@ -1,0 +1,19 @@
+.wrapper {
+   margin: auto;
+}
+
+.notFoundImg {
+   background-image: url('./assets/Frame.svg');
+   width: 240px;
+   height: 230px;
+   background-repeat: no-repeat;
+   background-size: contain;
+   margin-top: 120px;
+   margin-bottom: 32px;
+}
+
+.wrapper p {
+   font: 700 24px Inter;
+   text-align: left;
+   margin-bottom: 32px;
+}
