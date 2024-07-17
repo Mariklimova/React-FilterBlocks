@@ -8,13 +8,16 @@ import Header from '../../Components/Header/Header';
 
 function Vacancy() {
 
-    const [LikedVacansies, setLikedVacansies] = useState(JSON.parse(localStorage.getItem('LikedArr'))||[]);
+    const [LikedVacansies, setLikedVacansies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
+    // const [flagColor, setFlagColor] = useState(style.starImg);
+
 
     const addToBasket = (el) => {
         const checkVacansies = LikedVacansies.filter((elem) => elem.id == el.id);
         if (!checkVacansies.length) {
             setLikedVacansies([...LikedVacansies, el]);
-            localStorage.setItem('LikedArr',JSON.stringify([...LikedVacansies, el]))
+            localStorage.setItem('LikedArr', JSON.stringify([...LikedVacansies, el]));
+            // setFlagColor(style.starImgColor);
         }
         console.log(LikedVacansies);
     }
@@ -25,8 +28,7 @@ function Vacancy() {
     const start = end - vacancyCount;
     const displayVacancy = arr.slice(start, end);
 
-
-
+    
     return <div className={style.wrapper}>
         <Header />
         <div className={style.form}>
