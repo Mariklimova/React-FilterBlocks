@@ -7,6 +7,10 @@ import NotFound from '../../Components/NotFound/NotFound';
 import Header from '../../Components/Header/Header';
 
 function Vacancy() {
+    const [search, setSearch] = useState('');
+    const [flagSearch, setFlagSearch] = useState(false);
+
+    const [allVacancies, setAllVacancies] = useState(arr)
 
     const [LikedVacansies, setLikedVacansies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
     // const [flagColor, setFlagColor] = useState(style.starImg);
@@ -26,14 +30,24 @@ function Vacancy() {
 
     const end = page * vacancyCount;
     const start = end - vacancyCount;
-    const displayVacancy = arr.slice(start, end);
+    const displayVacancy = allVacancies.slice(start, end);
 
-    
+    useEffect(() => {
+        if (!search) {
+            setAllVacancies(arr);
+            setFlagSearch(false);
+            return;
+        }
+        const filtVacancies = arr.filter((el) => el.name.toLowerCase().includes(search.toLowerCase()));
+        setAllVacancies(filtVacancies);
+        setFlagSearch(false);
+    }, [flagSearch,search])
+
     return <div className={style.wrapper}>
         <Header />
         <div className={style.form}>
-            <TextField fullWidth id="outlined-basic" label="Outlined" variant="outlined" />
-            <Button variant="contained">Contained</Button>
+            <TextField fullWidth id="outlined-basic" label="Outlined" variant="outlined" onChange={(e) => setSearch(e.target.value)} />
+            <Button variant="contained" onClick={() => setFlagSearch(true)}>Contained</Button>
         </div>
         <div className={style.info}>
             {displayVacancy.map((el, i) => <div className={style.item} key={i}>
@@ -56,7 +70,7 @@ function Vacancy() {
         </div>
 
         {!arr.length ? <NotFound /> : null}
-        <Pagination page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(arr.length / vacancyCount)} variant="outlined" color="secondary" />
+        <Pagination page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(allVacancies.length / vacancyCount)} variant="outlined" color="secondary" />
 
     </div>
 
