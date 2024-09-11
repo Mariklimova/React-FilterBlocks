@@ -49,9 +49,24 @@
         z-index: 5;
         right: 25px;
         top: 25px;
+
+        &:hover{
+            background-image: url('./assets/Star.svg');  
+        }
+
     }
 
-   
+    .starImgLight {
+        background-image: url('./assets/Star.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        z-index: 5;
+        right: 25px;
+        top: 25px;
+    }
 }
 
 .salary_workday {

@@ -13,7 +13,7 @@ function Vacancy() {
     const [allVacancies, setAllVacancies] = useState(arr)
 
     const [LikedVacansies, setLikedVacansies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
-    // const [flagColor, setFlagColor] = useState(style.starImg);
+    
 
 
     const addToBasket = (el) => {
@@ -21,7 +21,7 @@ function Vacancy() {
         if (!checkVacansies.length) {
             setLikedVacansies([...LikedVacansies, el]);
             localStorage.setItem('LikedArr', JSON.stringify([...LikedVacansies, el]));
-            // setFlagColor(style.starImgColor);
+        
         }
         console.log(LikedVacansies);
     }
