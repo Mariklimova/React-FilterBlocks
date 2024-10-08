@@ -6,7 +6,7 @@ import {Pagination } from '@mui/material';
 
   const end = page * vacancyCount;
   const start = end - vacancyCount;
-  // const displayVacancy = allVacancies.slice(start, end);
+  const displayVacancy = allVacancies.slice(start, end);
 
   return <>
     <Pagination page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(allVacancies.length / vacancyCount)} variant="outlined" color="primary" />

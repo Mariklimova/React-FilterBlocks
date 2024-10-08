@@ -6,24 +6,24 @@ import { Link } from 'react-router-dom';
 import NotFound from '../../Components/NotFound/NotFound';
 import Header from '../../Components/Header/Header';
 
-function Vacancy() {
+export default function Vacancy() {
     const [search, setSearch] = useState('');
     const [flagSearch, setFlagSearch] = useState(false);
 
     const [allVacancies, setAllVacancies] = useState(arr)
 
-    const [LikedVacansies, setLikedVacansies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
+    const [LikedVacancies, setLikedVacansies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
     
 
 
     const addToBasket = (el) => {
-        const checkVacansies = LikedVacansies.filter((elem) => elem.id == el.id);
+        const checkVacansies = LikedVacancies.filter((elem) => elem.id == el.id);
         if (!checkVacansies.length) {
-            setLikedVacansies([...LikedVacansies, el]);
-            localStorage.setItem('LikedArr', JSON.stringify([...LikedVacansies, el]));
+            setLikedVacansies([...LikedVacancies, el]);
+            localStorage.setItem('LikedArr', JSON.stringify([...LikedVacancies, el]));
         
         }
-        console.log(LikedVacansies);
+        console.log(LikedVacancies);
     }
     const vacancyCount = 4;
     const [page, setPage] = useState(1);
@@ -75,7 +75,3 @@ function Vacancy() {
     </div>
 
 }
-
-
-
-export default Vacancy

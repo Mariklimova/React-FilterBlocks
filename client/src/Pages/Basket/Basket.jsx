@@ -5,18 +5,20 @@ import { Link } from "react-router-dom";
 import NotFound from "../../Components/NotFound/NotFound";
 import { Pagination } from "@mui/material";
 
-function Basket() {
+export default function Basket() {
 
-    const [newVacancies, setNewVacancies] = useState([]);
+    const [newVacancies, setNewVacancies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
 
     const getLikedVacansies = () => {
-        setNewVacancies(JSON.parse(localStorage.getItem('LikedArr')))
+        // const likedVacancies = JSON.parse(localStorage.getItem('LikedArr'));
+        // setNewVacancies(likedVacancies ? likedVacancies : []);
+        setNewVacancies(newVacancies)
     }
 
     const deleteLikedVacansies = (el) => {
         const deleteVacancies = newVacancies.filter((element) => element.id !== el.id)
-        localStorage.setItem('LikedArr', JSON.stringify([...deleteVacancies, el]))
-        setNewVacancies([...deleteVacancies])
+        localStorage.setItem('LikedArr', JSON.stringify(deleteVacancies))
+        setNewVacancies(deleteVacancies)
     }
 
     useEffect(() => {
@@ -28,13 +30,14 @@ function Basket() {
     const [page, setPage] = useState(1);
     const end = page * vacancyCount;
     const start = end - vacancyCount;
+    console.log(newVacancies);
     const displayVacancy = newVacancies.slice(start, end);
 
     return <div className={style.wrapper}>
         <Header />
 
         <div className={style.info}>
-            {displayVacancy.map((el, i) => <div className={style.item} key={i}>
+            {displayVacancy.map((el) => <div className={style.item} key={el.id}>
                 <Link to={`/${el.id}/${el.name}`}>
                     <h3>{el.name}</h3>
                     <div className={style.salary_workday}>
@@ -56,4 +59,3 @@ function Basket() {
         <Pagination page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(newVacancies.length / vacancyCount)} variant="outlined" color="secondary" />
     </div>
 }
-export default Basket
