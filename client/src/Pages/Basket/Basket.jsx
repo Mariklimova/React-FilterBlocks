@@ -10,8 +10,6 @@ export default function Basket() {
     const [newVacancies, setNewVacancies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
 
     const getLikedVacansies = () => {
-        // const likedVacancies = JSON.parse(localStorage.getItem('LikedArr'));
-        // setNewVacancies(likedVacancies ? likedVacancies : []);
         setNewVacancies(newVacancies)
     }
 
@@ -30,7 +28,6 @@ export default function Basket() {
     const [page, setPage] = useState(1);
     const end = page * vacancyCount;
     const start = end - vacancyCount;
-    console.log(newVacancies);
     const displayVacancy = newVacancies.slice(start, end);
 
     return <div className={style.wrapper}>

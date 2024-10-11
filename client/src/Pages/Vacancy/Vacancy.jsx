@@ -12,19 +12,21 @@ export default function Vacancy() {
 
     const [allVacancies, setAllVacancies] = useState(arr)
 
-    const [LikedVacancies, setLikedVacansies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
-    
+    const likedVacanciesFromStorage = JSON.parse(localStorage.getItem('LikedArr'));
+    const [LikedVacancies, setLikedVacanсies] = useState(Array.isArray(likedVacanciesFromStorage) ? likedVacanciesFromStorage : []);
+
 
 
     const addToBasket = (el) => {
-        const checkVacansies = LikedVacancies.filter((elem) => elem.id == el.id);
+        const checkVacansies = LikedVacancies.filter((elem) => elem.id === el.id);
         if (!checkVacansies.length) {
-            setLikedVacansies([...LikedVacancies, el]);
-            localStorage.setItem('LikedArr', JSON.stringify([...LikedVacancies, el]));
-        
+            const updatedVacancies = [...LikedVacancies, el];
+            setLikedVacanсies(updatedVacancies);
+            localStorage.setItem('LikedArr', JSON.stringify(updatedVacancies));
+
         }
-        console.log(LikedVacancies);
     }
+
     const vacancyCount = 4;
     const [page, setPage] = useState(1);
 
@@ -41,7 +43,7 @@ export default function Vacancy() {
         const filtVacancies = arr.filter((el) => el.name.toLowerCase().includes(search.toLowerCase()));
         setAllVacancies(filtVacancies);
         setFlagSearch(false);
-    }, [flagSearch,search])
+    }, [flagSearch, search])
 
     return <div className={style.wrapper}>
         <Header />
@@ -50,7 +52,7 @@ export default function Vacancy() {
             <Button variant="contained" onClick={() => setFlagSearch(true)}>Contained</Button>
         </div>
         <div className={style.info}>
-            {displayVacancy.map((el, i) => <div className={style.item} key={i}>
+            {displayVacancy.map((el) => <div className={style.item} key={el.id}>
                 <Link to={`/${el.id}/${el.name}`}>
                     <h3>{el.name}</h3>
                     <div className={style.salary_workday}>
@@ -69,7 +71,7 @@ export default function Vacancy() {
 
         </div>
 
-        {!arr.length ? <NotFound /> : null}
+        {!allVacancies.length ? <NotFound /> : null}
         <Pagination page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(allVacancies.length / vacancyCount)} variant="outlined" color="secondary" />
 
     </div>
