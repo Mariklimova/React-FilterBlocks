@@ -27,6 +27,8 @@ export default function Vacancy() {
         }
     }
 
+    const isLiked = (id) => LikedVacancies.some((vacancy) => vacancy.id === id);
+
     const vacancyCount = 4;
     const [page, setPage] = useState(1);
 
@@ -65,7 +67,7 @@ export default function Vacancy() {
                         <p>{el.city}</p>
                     </div>
                 </Link>
-                <div className={style.starImg} onClick={() => addToBasket(el)}></div>
+                <div className={`${style.starImg} ${isLiked(el.id) ? style.starImgLight : ''}`} onClick={() => addToBasket(el)}></div>
             </div>
             )}
 
