@@ -1,10 +1,11 @@
-import { TextField, Button, Pagination } from '@mui/material';
+import { TextField, Button} from '@mui/material';
 import style from './style.module.scss'
 import { useEffect, useState } from 'react';
 import arr from '../../Storage/arr.json'
 import { Link } from 'react-router-dom';
 import NotFound from '../../Components/NotFound/NotFound';
 import Header from '../../Components/Header/Header';
+import PaginationComponent from '../../Components/Pagination/PaginationComponent'
 
 export default function Vacancy() {
     const [search, setSearch] = useState('');
@@ -74,7 +75,7 @@ export default function Vacancy() {
         </div>
 
         {!allVacancies.length ? <NotFound /> : null}
-        <Pagination page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(allVacancies.length / vacancyCount)} variant="outlined" color="secondary" />
+        <PaginationComponent page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(allVacancies.length / vacancyCount)} />
 
     </div>
 

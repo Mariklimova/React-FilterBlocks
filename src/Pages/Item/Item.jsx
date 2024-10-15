@@ -1,10 +1,9 @@
 import { useParams } from 'react-router-dom'
 import arr from '../../Storage/arr.json'
 import style from './item.module.scss'
-function Item() {
 
+export default function Item() {
     const { id } = useParams()
-
     const [result] = arr.filter((el) => el.id === +id);
 
     return <>
@@ -25,18 +24,16 @@ function Item() {
 
             <div className={style.description}>
                 <h2>Обязанности:</h2>
-                <ul>{result.responsibilities.map((el) => <li>{el}</li>)}</ul>
+                <ul>{result.responsibilities.map((el,i) => <li key={`responsibility-${i}`}>{el}</li>)}</ul>
 
                 <h2>Требования:</h2>
-                <ul>{result.requirements.map((el) => <li>{el}</li>)}</ul>
+                <ul>{result.requirements.map((el,i) => <li key={`requirement-${i}`}>{el}</li>)}</ul>
 
                 <h2>Условия:</h2>
-                <ul>{result.conditions.map((el) => <li>{el}</li>)}</ul>
+                <ul>{result.conditions.map((el,i) => <li key={`condition-${i}`}>{el}</li>)}</ul>
 
             </div>
         </div>
     </>
 
 }
-
-export default Item

@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Header from "../../Components/Header/Header"
 import style from './basket.module.scss'
 import { Link } from "react-router-dom";
 import NotFound from "../../Components/NotFound/NotFound";
-import { Pagination } from "@mui/material";
+import PaginationComponent from '../../Components/Pagination/PaginationComponent'
 
 export default function Basket() {
 
     const [newVacancies, setNewVacancies] = useState(JSON.parse(localStorage.getItem('LikedArr')) || []);
 
-    const getLikedVacansies = () => {
-        setNewVacancies(newVacancies)
-    }
+    const getLikedVacansies = useCallback(() => {
+        setNewVacancies(JSON.parse(localStorage.getItem('LikedArr')) || [])
+    }, [])
 
     const deleteLikedVacansies = (el) => {
         const deleteVacancies = newVacancies.filter((element) => element.id !== el.id)
@@ -21,7 +21,7 @@ export default function Basket() {
 
     useEffect(() => {
         getLikedVacansies()
-    }, []);
+    }, [getLikedVacansies]);
 
 
     const vacancyCount = 4;
@@ -53,6 +53,6 @@ export default function Basket() {
 
         </div>
         {!newVacancies.length ? <NotFound /> : null}
-        <Pagination page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(newVacancies.length / vacancyCount)} variant="outlined" color="secondary" />
+        <PaginationComponent page={page} onChange={(e, num) => setPage(num)} count={Math.ceil(newVacancies.length / vacancyCount)} />
     </div>
 }
